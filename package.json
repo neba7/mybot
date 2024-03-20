@@ -1,12 +1,15 @@
 {
-  "name": "Time Counter",
+  "name": "telegram-bot",
   "version": "1.0.0",
-  "description": "A simple Telegram bot that updates the user's bio with elapsed time",
-  "main": "index.js", 
+  "description": "Telegram bot example",
+  "main": "index.js",
   "scripts": {
-    "start": "node index.js" 
+    "start": "node index.js"
   },
+  "author": "Your Name",
+  "license": "MIT",
   "dependencies": {
-    "node-telegram-bot-api": "^0.65.1" 
+    "node-telegram-bot-api": "^0.65.1"
   }
 }
+
