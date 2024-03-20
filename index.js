@@ -1,8 +1,8 @@
 const { Telegraf } = require('telegraf');
 const { sleep } = require('sleep');
 
-// Replace 'YOUR_BOT_TOKEN' with the token you got from BotFather
-const TOKEN = '6902572266:AAHwnqhf1vZjcZZq-XwaSNoyCnZ3lsXBoiI';
+// Replace 'YOUR_BOT_TOKEN' with your actual bot token
+const TOKEN = process.env.TOKEN;
 
 // Function to update the bio
 async function updateBio(ctx) {
@@ -25,7 +25,7 @@ function start(ctx) {
 }
 
 // Create a new instance of Telegraf bot
-const bot = new Telegraf(process.env.TOKEN);
+const bot = new Telegraf(TOKEN);
 
 // Add command handlers
 bot.command('start', start);
@@ -35,4 +35,3 @@ bot.on('text', updateBio);
 
 // Start the bot
 bot.launch().then(() => console.log('Bot started'));
-package.json
