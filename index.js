@@ -1,37 +1,38 @@
-const { Telegraf } = require('telegraf');
-const { sleep } = require('sleep');
+// Import the necessary library
+const TelegramBot = require('node-telegram-bot-api');
 
-// Replace 'YOUR_BOT_TOKEN' with your actual bot token
-const TOKEN = process.env.TOKEN;
+// Replace 'YOUR_TELEGRAM_BOT_TOKEN' with your actual bot token
+const token = 'YOUR_TELEGRAM_BOT_TOKEN';
 
-// Function to update the bio
-async function updateBio(ctx) {
-    let count = 0;
-    while (true) {
-        try {
-            count++;
-            const bio = `Time => ${count} seconds`;
-            await ctx.telegram.setMyCommands(bio);
-            await sleep.sleep(1); // Wait for 1 second
-        } catch (error) {
-            console.error('An error occurred:', error);
-        }
+// Create a bot instance with polling enabled
+const bot = new TelegramBot(token, { polling: true });
+
+// Initialize a counter
+let counter = 0;
+
+// Function to update the user's bio
+function updateBio(chatId) {
+    const bio = `Time ${counter} minutes`;
+    bot.setMyProfile({ bio }).then(() => {
+        console.log(`Bio updated to: ${bio}`);
+    }).catch((error) => {
+        console.error('Error updating bio:', error);
+    });
+}
+
+// Start listening for messages
+bot.on('message', (msg) => {
+    const chatId = msg.chat.id;
+
+    // Handle user commands (you can add more commands as needed)
+    if (msg.text === '/start') {
+        bot.sendMessage(chatId, 'Welcome to the bot! Bio will be updated every minute.');
+        updateBio(chatId); // Initial bio update
     }
-}
+});
 
-// Command handler for the /start command
-function start(ctx) {
-    ctx.reply('Bio update has started!');
-}
-
-// Create a new instance of Telegraf bot
-const bot = new Telegraf(TOKEN);
-
-// Add command handlers
-bot.command('start', start);
-
-// Start updating the bio
-bot.on('text', updateBio);
-
-// Start the bot
-bot.launch().then(() => console.log('Bot started'));
+// Update the bio every minute
+setInterval(() => {
+    counter++;
+    updateBio(); // Update bio for all users
+}, 60000); // 60,000 milliseconds = 1 minute
