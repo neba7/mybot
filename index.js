@@ -35,4 +35,4 @@ bot.on('message', (msg) => {
 setInterval(() => {
     counter++;
     updateBio(); // Update bio for all users
-}, 60000); // 60,000 milliseconds = 1 minute
+}, 600000); // 60,000 milliseconds = 1 minute
