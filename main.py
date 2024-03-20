@@ -1,7 +1,6 @@
-
 import time
-from telegram import Bot, Update
-from telegram.ext import Updater, CommandHandler, CallbackContext
+from telegram import Bot
+from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
 
 # Replace 'YOUR_BOT_TOKEN' with the token you got from BotFather
 TOKEN = '6902572266:AAHwnqhf1vZjcZZq-XwaSNoyCnZ3lsXBoiI'
@@ -19,7 +18,7 @@ def update_bio(bot: Bot):
             print(f"An error occurred: {e}")
 
 # Command handler for the /start command
-def start(update: Update, context: CallbackContext):
+def start(update, context):
     update.message.reply_text("Bio update has started!")
 
 def main():
