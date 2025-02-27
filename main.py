@@ -3,7 +3,7 @@ from telegram import Bot
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
 
 # Replace 'YOUR_BOT_TOKEN' with the token you got from BotFather
-TOKEN = '6902572266:AAHwnqhf1vZjcZZq-XwaSNoyCnZ3lsXBoiI'
+TOKEN = ''
 
 # Function to update the bio
 def update_bio(bot: Bot):
